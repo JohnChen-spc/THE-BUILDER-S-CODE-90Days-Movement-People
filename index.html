@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专注力锻造舱 | 课程中心</title>
+    <!-- 升级字体库 - 更具高级感的无衬线字体组合 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700;800;900&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* 锻造厂主题色调体系 - 蓝色系（降低饱和度，减少刺眼感） */
+            --bg-primary: #0F172A;      /* 深海蓝主背景 */
+            --bg-secondary: #1E293B;    /* 藏青蓝次背景 */
+            --bg-card: #273449;         /* 卡片深蓝 */
+            --bg-card-hover: #334155;   /* 卡片悬停色 */
+            --text-main: #F8FAFC;       /* 浅白文字 */
+            --text-sub: #94A3B8;        /* 浅灰蓝文字 */
+            --text-muted: #64748B;      /* 深灰蓝文字 */
+            
+            /* 蓝色系 - 分层设计（降低饱和度，更柔和） */
+            --blue-matte: #254BA0;      /* 哑光深蓝（降低饱和度） */
+            --blue-metal: #4A90E2;      /* 金属亮蓝（降低饱和度） */
+            --blue-glow: rgba(74, 144, 226, 0.15); /* 蓝色辉光（降低透明度） */
+            --blue-light: #70A5F0;      /* 浅蓝（降低饱和度） */
+            --blue-dark: #254BA0;       /* 深蓝（降低饱和度） */
+            
+            /* 锻造金属质感变量 */
+            --metal-dark: #1A2539;      /* 黑蓝色金属 */
+            --metal-medium: #213047;    /* 中蓝金属 */
+            --metal-light: #273952;     /* 浅蓝金属 */
+            --metal-border: rgba(248, 250, 252, 0.08); /* 浅白边框 */
+            
+            /* 锻造光影系统（降低阴影强度） */
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.15); /* 降低强度 */
+            --shadow-hard: 0 8px 30px rgba(0, 0, 0, 0.25); /* 降低强度 */
+            --shadow-gold: 0 0 25px rgba(74, 144, 226, 0.1); /* 降低强度 */
+            --shadow-inner: inset 0 1px 0 rgba(248, 250, 252, 0.05);
+            
+            /* 锻造渐变系统（更柔和的渐变） */
+            --gradient-body: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            --gradient-metal: linear-gradient(145deg, var(--metal-medium), var(--metal-dark));
+            --gradient-gold: linear-gradient(135deg, var(--blue-matte) 0%, var(--blue-metal) 100%);
+            --gradient-highlight: linear-gradient(135deg, rgba(248, 250, 252, 0.08) 0%, transparent 60%); /* 降低强度 */
+            --gradient-forge: 
+                linear-gradient(45deg, rgba(74, 144, 226, 0.04) 0%, transparent 50%), /* 降低强度 */
+                linear-gradient(135deg, rgba(74, 144, 226, 0.02) 0%, transparent 70%); /* 降低强度 */
+            
+            /* 字体系统变量 - 高级课程专属 */
+            --font-heading: 'Montserrat', 'Noto Sans SC', sans-serif;
+            --font-body: 'Inter', 'Noto Sans SC', sans-serif;
+            --letter-spacing-heading: 0.8px;
+            --letter-spacing-body: 0.3px;
+            --line-height-heading: 1.15;
+            --line-height-body: 1.65;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-body);
+            scroll-behavior: smooth;
+            letter-spacing: var(--letter-spacing-body);
+            line-height: var(--line-height-body);
+            /* 高级字体渲染优化 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        body {
+            background: var(--gradient-body);
+            color: var(--text-main);
+            /* 锻造厂纹理 - 锤纹+铁锈+熔炉光影（降低强度） */
+            background-image: 
+                /* 锻造锤纹 */
+                radial-gradient(circle at 50% 50%, rgba(248, 250, 252, 0.015) 0.5px, transparent 0.5px),
+                /* 铁锈拉丝纹理 */
+                linear-gradient(90deg, rgba(248, 250, 252, 0.008) 0.5px, transparent 0.5px),
+                /* 熔炉热辐射效果 */
+                var(--gradient-forge),
+                /* 基础锻造渐变 */
+                var(--gradient-body);
+            background-size: 
+                40px 40px,
+                20px 20px,
+                100% 100%,
+                100% 100%;
+            background-position: center center;
+            min-height: 100vh;
+            padding: clamp(20px, 4vw, 40px);
+            position: relative;
+        }
+
+        /* 锻造厂暗纹装饰 - 熔炉格栅图案（降低透明度） */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M81.2 100c0-10.5 8.5-19 19-19s19 8.5 19 19-8.5 19-19 19-19-8.5-19-19zm38.4 0c0-10.5 8.5-19 19-19s19 8.5 19 19-8.5 19-19 19-19-8.5-19-19zM81.2 60c0-10.5 8.5-19 19-19s19 8.5 19 19-8.5 19-19 19-19-8.5-19-19zm38.4 0c0-10.5 8.5-19 19-19s19 8.5 19 19-8.5 19-19 19-19-8.5-19-19zM81.2 140c0-10.5 8.5-19 19-19s19 8.5 19 19-8.5 19-19 19-19-8.5-19-19zm38.4 0c0-10.5 8.5-19 19-19s19 8.5 19 19-8.5 19-19 19-19-8.5-19-19z' fill='%234a90e2' fill-opacity='0.018' fill-rule='evenodd'/%3E%3C/svg%3E");
+            opacity: 0.6; /* 降低透明度 */
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 标题字体统一样式 - 高级感强化 */
+        h1, h2, h3, .chapter-title, .main-title, .sidebar-title, .current-video-title, .task-title {
+            font-family: var(--font-heading);
+            letter-spacing: var(--letter-spacing-heading);
+            line-height: var(--line-height-heading);
+            font-weight: 700;
+            text-transform: none;
+        }
+
+        /* 页面头部 - 锻造厂风格分隔 */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: clamp(20px, 3vw, 35px);
+            padding-bottom: clamp(15px, 2vw, 25px);
+            border-bottom: 1px solid rgba(74, 144, 226, 0.08); /* 降低透明度 */
+            position: relative;
+        }
+
+        .page-header::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 80px;
+            height: 1px;
+            background: var(--blue-metal);
+            opacity: 0.6; /* 降低透明度 */
+            box-shadow: 0 0 6px var(--blue-glow);
+        }
+
+        /* 添加 MovementPeople Logo 容器 */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: clamp(15px, 3vw, 25px);
+        }
+
+        .mp-logo {
+            font-size: clamp(20px, 3vw, 30px);
+            font-weight: 800;
+            color: var(--text-main);
+            opacity: 0.9;
+            letter-spacing: 1px;
+            /* 简单的 Logo 样式，你可以替换为实际图片 */
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+        }
+
+        .course-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 2vw, 20px);
+        }
+
+        /* 大脑 Logo 变形动画效果 */
+        .course-icon {
+            font-size: clamp(24px, 4vw, 36px);
+            color: var(--blue-metal);
+            /* 熔炉金属光泽（降低强度） */
+            text-shadow: 
+                0 0 8px var(--blue-glow), /* 降低辉光大小 */
+                0 1px 3px rgba(0,0,0,0.4), /* 降低阴影强度 */
+                0 -1px 2px rgba(248, 250, 252, 0.05);
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-origin: center center;
+        }
+
+        /* 触碰变形效果 */
+        .course-icon:hover {
+            transform: scale(1.15) rotate(5deg);
+            color: var(--blue-light);
+            text-shadow: 
+                0 0 15px var(--blue-glow),
+                0 2px 4px rgba(0,0,0,0.5),
+                0 -1px 3px rgba(248, 250, 252, 0.08);
+            animation: pulse 1.2s infinite alternate;
+        }
+
+        /* 脉动动画增强变形效果 */
+        @keyframes pulse {
+            0% { transform: scale(1.15) rotate(5deg); }
+            50% { transform: scale(1.1) rotate(-3deg); }
+            100% { transform: scale(1.18) rotate(2deg); }
+        }
+
+        .main-title {
+            font-size: clamp(24px, 4.5vw, 36px);
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            /* 锻造文字质感（降低强度） */
+            text-shadow: 
+                0 1px 2px rgba(0,0,0,0.6), 
+                0 0 4px rgba(74, 144, 226, 0.08); /* 降低辉光 */
+        }
+
+        .sub-title {
+            font-size: clamp(13px, 1.6vw, 15px);
+            color: var(--text-muted);
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+            font-weight: 400;
+            font-family: var(--font-body);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: clamp(15px, 2vw, 25px);
+        }
+
+        .back-btn {
+            padding: clamp(6px, 1.5vw, 10px) clamp(15px, 3vw, 24px);
+            background: var(--gradient-metal);
+            border: 1px solid rgba(74, 144, 226, 0.08); /* 降低透明度 */
+            border-radius: 8px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: clamp(13px, 1.6vw, 15px);
+            font-weight: 500;
+            font-family: var(--font-heading);
+            letter-spacing: 0.4px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            /* 锻造按钮质感（降低强度） */
+            box-shadow: 
+                var(--shadow-soft),
+                var(--shadow-inner);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .back-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(248, 250, 252, 0.05), transparent); /* 降低强度 */
+            transition: all 0.6s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: rgba(74, 144, 226, 0.15); /* 降低透明度 */
+            color: var(--blue-metal);
+            box-shadow: 
+                var(--shadow-hard),
+                var(--shadow-gold),
+                var(--shadow-inner);
+            transform: translateY(-1px);
+        }
+
+        .back-btn:hover::before {
+            left: 100%;
+        }
+
+        /* 核心布局 - 锻造厂工作台分栏 */
+        .course-container {
+            display: grid;
+            grid-template-columns: clamp(280px, 30vw, 400px) 1fr;
+            gap: clamp(20px, 3vw, 35px);
+            height: calc(100vh - clamp(100px, 15vw, 180px));
+        }
+
+        /* 左侧课程列表 - 锻造工具柜风格 */
+        .course-sidebar {
+            background: var(--gradient-metal);
+            border: 1px solid var(--metal-border);
+            border-radius: 16px;
+            padding: clamp(15px, 2vw, 25px);
+            overflow-y: auto;
+            box-shadow: 
+                var(--shadow-hard),
+                var(--shadow-inner);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 锻造金属高光（降低强度） */
+        .course-sidebar::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-highlight);
+            border-radius: 16px;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.8; /* 降低透明度 */
+        }
+
+        /* 锻造厂滚动条设计 */
+        .course-sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .course-sidebar::-webkit-scrollbar-track {
+            background: var(--metal-dark);
+            border-radius: 4px;
+            margin: 8px 0;
+        }
+
+        .course-sidebar::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--blue-matte), var(--blue-dark));
+            border-radius: 4px;
+            box-shadow: 
+                0 0 3px rgba(0,0,0,0.4), /* 降低强度 */
+                inset 0 1px 0 rgba(248, 250, 252, 0.1); /* 降低强度 */
+            transition: all 0.3s ease;
+        }
+
+        .course-sidebar::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--blue-metal), var(--blue-matte));
+            box-shadow: 
+                0 0 5px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(248, 250, 252, 0.15);
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: clamp(15px, 2vw, 25px);
+            padding-bottom: clamp(10px, 1.5vw, 18px);
+            border-bottom: 1px solid rgba(74, 144, 226, 0.08); /* 降低透明度 */
+        }
+
+        .sidebar-title {
+            font-size: clamp(18px, 2.2vw, 22px);
+            font-weight: 700;
+            color: var(--text-main);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4); /* 降低强度 */
+            letter-spacing: 0.6px;
+        }
+
+        .progress-info {
+            font-size: clamp(12px, 1.3vw, 14px);
+            color: var(--text-muted);
+            font-weight: 400;
+            letter-spacing: 0.4px;
+        }
+
+        .progress-info span {
+            color: var(--blue-metal);
+            font-weight: 600;
+            text-shadow: 0 0 3px var(--blue-glow); /* 降低辉光 */
+        }
+
+        /* 课程列表项 - 锻造工具按钮 */
+        .course-list {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(8px, 1.2vw, 12px);
+        }
+
+        /* 锻造标签样式 - 优化格式 */
+        .forge-tag {
+            font-size: clamp(12px, 1.4vw, 14px);
+            color: var(--blue-light);
+            margin: 10px 0 15px 11px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding: 6px 12px;
+            background: rgba(74, 144, 226, 0.08);
+            border-radius: 6px;
+            width: fit-content;
+            border: 1px solid rgba(112, 165, 240, 0.15);
+        }
+
+        .forge-tag span {
+            color: var(--blue-metal);
+            font-weight: 600;
+        }
+
+        /* 大课标题样式 - 调整字体大小，与A课区分 */
+        .main-course-title {
+            font-size: clamp(17px, 2vw, 20px);
+            font-weight: 800;
+            color: var(--text-main);
+            margin: 10px 0 15px 0;
+            padding-left: 10px;
+            border-left: 4px solid var(--blue-metal);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            line-height: 1.3;
+        }
+
+        /* A课标题样式（保持原有大小） */
+        .course-item-title {
+            font-size: clamp(14px, 1.6vw, 17px);
+            font-weight: 600;
+            color: var(--text-main);
+            font-family: var(--font-heading);
+            letter-spacing: 0.4px;
+        }
+
+        .course-item, .course-task-box {
+            padding: clamp(12px, 2vw, 18px);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-left: 3px solid transparent;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(26, 37, 57, 0.7);
+            border: 1px solid rgba(74, 144, 226, 0.05); /* 降低透明度 */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-item::before, .course-task-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.04), transparent); /* 降低强度 */
+            transition: all 0.6s ease;
+        }
+
+        .course-item:hover, .course-task-box:hover {
+            background: var(--bg-card-hover);
+            border-left-color: rgba(74, 144, 226, 0.4); /* 降低透明度 */
+            border-color: rgba(74, 144, 226, 0.08); /* 降低透明度 */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* 降低强度 */
+            transform: translateY(-1px);
+        }
+
+        .course-item:hover::before, .course-task-box:hover::before {
+            left: 100%;
+        }
+
+        .course-item.active, .course-task-box.active {
+            background: rgba(74, 144, 226, 0.08); /* 降低透明度 */
+            border-left-color: var(--blue-metal);
+            box-shadow: 
+                0 0 12px var(--shadow-gold), /* 降低大小 */
+                inset 0 1px 0 rgba(248, 250, 252, 0.06); /* 降低强度 */
+        }
+
+        .course-item-info, .course-task-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .course-item-desc, .course-task-desc {
+            font-size: clamp(11px, 1.2vw, 13px);
+            color: var(--text-muted);
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        /* 章节分隔 - 锻造焊缝分割线 */
+        .chapter-divider {
+            margin: clamp(18px, 2.5vw, 25px) 0 clamp(8px, 1vw, 12px) 0;
+            padding: clamp(8px, 1vw, 12px) 0;
+            border-bottom: 1px solid rgba(74, 144, 226, 0.06); /* 降低透明度 */
+            position: relative;
+        }
+
+        .chapter-divider::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 50px;
+            height: 1px;
+            background: var(--blue-metal);
+            box-shadow: 0 0 6px var(--blue-glow); /* 降低大小 */
+            opacity: 0.8; /* 降低透明度 */
+        }
+
+        .chapter-title {
+            font-size: clamp(13px, 1.4vw, 15px);
+            font-weight: 700;
+            color: var(--blue-metal);
+            letter-spacing: 1.5px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4); /* 降低强度 */
+            text-transform: uppercase;
+        }
+
+        /* 即将开放的占位区域样式 */
+        .coming-soon-section {
+            margin-top: 20px;
+            padding: 40px 20px;
+            border-radius: 10px;
+            background: rgba(26, 37, 57, 0.5);
+            border: 1px dashed rgba(74, 144, 226, 0.15); /* 降低透明度 */
+            text-align: center;
+        }
+
+        .coming-soon-icon {
+            font-size: 40px;
+            color: var(--blue-metal);
+            margin-bottom: 15px;
+            opacity: 0.6; /* 降低透明度 */
+        }
+
+        .coming-soon-title {
+            font-size: clamp(16px, 1.8vw, 18px);
+            color: var(--text-main);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .coming-soon-desc {
+            font-size: clamp(12px, 1.4vw, 14px);
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        /* 右侧内容区域 - 熔炉观察窗风格 */
+        .content-area {
+            background: var(--gradient-metal);
+            border: 1px solid var(--metal-border);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 
+                var(--shadow-hard),
+                var(--shadow-inner);
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-area::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-highlight);
+            border-radius: 16px;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.8; /* 降低透明度 */
+        }
+
+        /* 视频播放器 - 熔炉观察窗 */
+        .video-player {
+            flex: 1;
+            background-color: #0A101F;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-bottom: 1px solid rgba(74, 144, 226, 0.06); /* 降低透明度 */
+            overflow: hidden;
+        }
+
+        .video-player::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 70%, rgba(0,0,0,0.6)); /* 降低强度 */
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* 视频iframe样式优化 */
+        .video-player iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            position: relative;
+            z-index: 0;
+        }
+
+        /* 任务内容区域 */
+        .task-content {
+            flex: 1;
+            padding: clamp(20px, 3vw, 35px);
+            overflow-y: auto;
+            display: none; /* 默认隐藏 */
+        }
+
+        .task-title {
+            font-size: clamp(20px, 2.7vw, 26px);
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: clamp(15px, 2vw, 20px);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            letter-spacing: 0.7px;
+        }
+
+        .task-objective {
+            background: rgba(74, 144, 226, 0.08);
+            border-left: 3px solid var(--blue-metal);
+            padding: clamp(15px, 2vw, 20px);
+            border-radius: 8px;
+            margin-bottom: clamp(20px, 3vw, 30px);
+        }
+
+        .task-objective-title {
+            font-size: clamp(16px, 2vw, 18px);
+            color: var(--blue-light);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .task-objective-desc {
+            font-size: clamp(14px, 1.6vw, 16px);
+            color: var(--text-sub);
+            line-height: 1.7;
+        }
+
+        .task-steps {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(20px, 3vw, 25px);
+        }
+
+        .task-step {
+            background: rgba(26, 37, 57, 0.5);
+            border: 1px solid rgba(74, 144, 226, 0.1);
+            border-radius: 10px;
+            padding: clamp(15px, 2vw, 20px);
+        }
+
+        .task-step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: var(--gradient-gold);
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            font-weight: 700;
+            margin-right: 10px;
+            box-shadow: 0 2px 8px var(--blue-glow);
+        }
+
+        .task-step-title {
+            font-size: clamp(16px, 2vw, 18px);
+            color: var(--text-main);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+        }
+
+        .task-step-content {
+            font-size: clamp(14px, 1.6vw, 16px);
+            color: var(--text-sub);
+            line-height: 1.8;
+            padding-left: 40px;
+        }
+
+        .task-step-content p {
+            margin-bottom: 10px;
+        }
+
+        .task-step-content ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .task-step-content li {
+            margin-bottom: 8px;
+        }
+
+        /* 内容信息栏 - 锻造铭牌风格 */
+        .content-info {
+            padding: clamp(18px, 2.5vw, 28px);
+            border-top: 1px solid rgba(74, 144, 226, 0.06); /* 降低透明度 */
+        }
+
+        .current-video-title {
+            font-size: clamp(20px, 2.7vw, 26px);
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: clamp(8px, 1.2vw, 12px);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5); /* 降低强度 */
+            letter-spacing: 0.7px;
+        }
+
+        .current-video-desc {
+            font-size: clamp(14px, 1.6vw, 17px);
+            color: var(--text-sub);
+            line-height: 1.75;
+            margin-bottom: clamp(15px, 2vw, 25px);
+            font-weight: 400;
+            max-width: 90%;
+            letter-spacing: 0.4px;
+        }
+
+        /* 移动端锻造厂适配 */
+        @media (max-width: 992px) {
+            .course-container {
+                grid-template-columns: clamp(260px, 35vw, 380px) 1fr;
+            }
+            
+            /* 移动端调整 Logo 显示 */
+            .mp-logo {
+                font-size: clamp(16px, 2.5vw, 24px);
+            }
+            
+            /* 移动端视频高度适配 */
+            .video-player iframe {
+                min-height: 300px;
+            }
+            
+            /* 移动端大课标题适配 */
+            .main-course-title {
+                font-size: clamp(15px, 1.8vw, 18px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .course-container {
+                grid-template-columns: 1fr;
+                height: auto;
+                gap: clamp(15px, 2vw, 25px);
+            }
+
+            .course-sidebar {
+                height: clamp(280px, 40vh, 400px);
+                margin-bottom: clamp(15px, 2vw, 25px);
+            }
+
+            .page-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: clamp(15px, 2vw, 20px);
+            }
+            
+            /* 移动端重新排列头部元素 */
+            .logo-container {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .header-actions {
+                width: 100%;
+                justify-content: flex-end;
+            }
+            
+            /* 移动端视频高度适配 */
+            .video-player iframe {
+                min-height: 250px;
+            }
+            
+            .task-step-content {
+                padding-left: 10px;
+            }
+            
+            /* 移动端锻造标签适配 */
+            .forge-tag {
+                font-size: clamp(11px, 1.3vw, 13px);
+                padding: 5px 10px;
+            }
+        }
+
+        /* 暗黑模式适配 - 更深的锻造色 */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0C111D;
+                --bg-secondary: #141B2D;
+                --bg-card: #1A2337;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 页面头部 -->
+    <header class="page-header">
+        <div class="logo-container">
+            <div class="course-title-wrap">
+                <i class="fas fa-brain course-icon"></i>
+                <div>
+                    <h1 class="main-title">专注力锻造舱</h1>
+                    <p class="sub-title">从注意力被殖民到心智盔甲锻造，重建专注的底层逻辑</p>
+                </div>
+            </div>
+            
+            <!-- MovementPeople Logo 区域 - 添加空格 -->
+            <div class="mp-logo">Movement People</div>
+        </div>
+        
+        <div class="header-actions">
+            <a href="#" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                返回核心体系
+            </a>
+        </div>
+    </header>
+
+    <!-- 核心内容容器 -->
+    <div class="course-container">
+        <!-- 左侧课程列表 -->
+        <aside class="course-sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">课程目录</h2>
+                <div class="progress-info">进度: <span>1/30</span></div>
+            </div>
+
+            <div class="course-list">
+                <!-- 第一章：基础认知 -->
+                <div class="chapter-divider">
+                    <h3 class="chapter-title">01 · 基础认知：夺回注意力主权</h3>
+                </div>
+                
+                <!-- 锻造标签 - 优化格式 -->
+                <div class="forge-tag">
+                    <i class="fas fa-tag"></i>
+                    <span>锻造标签｜解除控制权</span>
+                </div>
+                
+                <!-- 大课标题 - 更大的字体尺寸 -->
+                <div class="main-course-title">
+                    大课：《你的注意力，正在被谁“殖民”？》
+                </div>
+                
+                <!-- A课 - 保持原有大小 -->
+                <div class="course-item active" id="video-item">
+                    <div class="course-item-info">
+                        <div class="course-item-title">A课：《你的注意力，正在被谁“殖民”？》</div>
+                        <div class="course-item-desc">12:45 · 诊断现状</div>
+                    </div>
+                </div>
+                
+                <!-- 本课程任务按钮 -->
+                <div class="course-task-box" id="task-item">
+                    <div class="course-task-info">
+                        <div class="course-task-title">
+                            <i class="fas fa-tasks"></i>
+                            本课程任务
+                        </div>
+                        <div class="course-task-desc">注意力普查 · 实操训练</div>
+                    </div>
+                </div>
+                
+                <!-- B课 -->
+                <div class="course-item">
+                    <div class="course-item-info">
+                        <div class="course-item-title">B课：《安装“注意力主权开关”的第一个动作》</div>
+                        <div class="course-item-desc">15:20 · 实操训练</div>
+                    </div>
+                </div>
+
+                <!-- 即将开放的占位区域 -->
+                <div class="coming-soon-section">
+                    <i class="fas fa-clock coming-soon-icon"></i>
+                    <h3 class="coming-soon-title">更多课程即将开放</h3>
+                    <p class="coming-soon-desc">
+                        我们正在精心打磨后续的专注力锻造课程，
+                        完成当前课程学习后，敬请期待更多精彩内容上线。
+                    </p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 右侧内容区域 -->
+        <main class="content-area">
+            <!-- 视频播放器 - 嵌入实际视频iframe -->
+            <div class="video-player" id="video-content">
+                <iframe src="https://player.xinpianchang.com/?aid=13584802&amp;mid=36Jm4aPDPrnwyjzB" allowfullscreen="" allow="fullscreen" frameborder="0" style="border: medium;"></iframe>
+            </div>
+
+            <!-- 任务内容区域 -->
+            <div class="task-content" id="task-content">
+                <h2 class="task-title">注意力普查</h2>
+                
+                <div class="task-objective">
+                    <div class="task-objective-title">目标</div>
+                    <div class="task-objective-desc">
+                        识别注意力被占用的来源，形成对自己注意力分布的清晰认知
+                    </div>
+                </div>
+                
+                <div class="task-steps">
+                    <div class="task-step">
+                        <div class="task-step-title">
+                            <span class="task-step-number">1</span>
+                            记录注意力占用事件
+                        </div>
+                        <div class="task-step-content">
+                            <p>今天任意时刻，当你发现自己注意力被打断、转移或分散时，停下来观察。</p>
+                            <p>不做任何调整，只记录发生的情况，包括：</p>
+                            <ul>
+                                <li><strong>占用来源</strong>：手机、杂念、他人的干扰等</li>
+                                <li><strong>发生时的环境</strong>：办公室、家里、通勤中</li>
+                                <li><strong>触发情境</strong>：看通知、思考未来问题、回应请求等</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="task-step">
+                        <div class="task-step-title">
+                            <span class="task-step-number">2</span>
+                            分析占用模式
+                        </div>
+                        <div class="task-step-content">
+                            <p>今天结束前，回顾记录，问自己：</p>
+                            <ul>
+                                <li>哪些是最频繁的占用来源？</li>
+                                <li>哪些情境最容易让注意力被转移？</li>
+                                <li>有没有发现规律或共同特征？</li>
+                            </ul>
+                            <p>目的不是立即改变行为，而是形成清晰认知：注意力被占用的模式是什么。</p>
+                        </div>
+                    </div>
+                    
+                    <div class="task-step">
+                        <div class="task-step-title">
+                            <span class="task-step-number">3</span>
+                            总结洞察
+                        </div>
+                        <div class="task-step-content">
+                            <p>写下两条你今天观察到的最重要洞察，例如：</p>
+                            <ul>
+                                <li>“我最多被社交消息打断，尤其是在上午工作高峰期。”</li>
+                                <li>“当我脑中产生‘我该做什么’的念头时，很容易被分散注意力。”</li>
+                            </ul>
+                            <p><strong>记录越具体，越利于后续训练。</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 内容信息栏 -->
+            <div class="content-info" id="video-info">
+                <h2 class="current-video-title">你的注意力，正在被谁“殖民”？</h2>
+                <p class="current-video-desc">
+                    在这个信息爆炸的时代，你的注意力正在被各种APP、社交媒体、广告和信息推送无情殖民。这节课程将帮助你诊断自己的注意力现状，看清注意力被消耗的底层机制，认识到注意力才是你最宝贵的资产，并学会安装第一个"注意力主权开关"，开始重新掌控自己的注意力。
+                </p>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // 获取DOM元素
+        const videoItem = document.getElementById('video-item');
+        const taskItem = document.getElementById('task-item');
+        const videoContent = document.getElementById('video-content');
+        const taskContent = document.getElementById('task-content');
+        const videoInfo = document.getElementById('video-info');
+
+        // 初始状态：显示视频，隐藏任务
+        videoContent.style.display = 'flex';
+        taskContent.style.display = 'none';
+
+        // 点击A课显示视频
+        videoItem.addEventListener('click', function() {
+            // 切换激活状态
+            videoItem.classList.add('active');
+            taskItem.classList.remove('active');
+            
+            // 显示视频内容，隐藏任务内容
+            videoContent.style.display = 'flex';
+            taskContent.style.display = 'none';
+            videoInfo.style.display = 'block';
+        });
+
+        // 点击任务按钮显示任务
+        taskItem.addEventListener('click', function() {
+            // 切换激活状态
+            taskItem.classList.add('active');
+            videoItem.classList.remove('active');
+            
+            // 显示任务内容，隐藏视频内容
+            videoContent.style.display = 'none';
+            taskContent.style.display = 'block';
+            videoInfo.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
