@@ -847,29 +847,40 @@
                 </div>
                 
                 <!-- A课 - 保持原有大小 -->
-                <div class="course-item active" id="video-item">
+                <div class="course-item active" id="video-item-a">
                     <div class="course-item-info">
                         <div class="course-item-title">A课：《你的注意力，正在被谁“殖民”？》</div>
                         <div class="course-item-desc">12:45 · 诊断现状</div>
                     </div>
                 </div>
                 
-                <!-- 本课程任务按钮 -->
-                <div class="course-task-box" id="task-item">
+                <!-- A课任务按钮 -->
+                <div class="course-task-box" id="task-item-a">
                     <div class="course-task-info">
                         <div class="course-task-title">
                             <i class="fas fa-tasks"></i>
-                            本课程任务
+                            A课任务：注意力普查
                         </div>
                         <div class="course-task-desc">注意力普查 · 实操训练</div>
                     </div>
                 </div>
                 
-                <!-- B课 -->
-                <div class="course-item">
+                <!-- B课 - 添加ID用于控制 -->
+                <div class="course-item" id="video-item-b">
                     <div class="course-item-info">
                         <div class="course-item-title">B课：《安装“注意力主权开关”的第一个动作》</div>
                         <div class="course-item-desc">15:20 · 实操训练</div>
+                    </div>
+                </div>
+                
+                <!-- B课任务按钮 -->
+                <div class="course-task-box" id="task-item-b">
+                    <div class="course-task-info">
+                        <div class="course-task-title">
+                            <i class="fas fa-tasks"></i>
+                            B课任务：注意力主权开关练习
+                        </div>
+                        <div class="course-task-desc">识别·暂停·觉察 · 实操训练</div>
                     </div>
                 </div>
 
@@ -889,11 +900,11 @@
         <main class="content-area">
             <!-- 视频播放器 - 嵌入实际视频iframe -->
             <div class="video-player" id="video-content">
-                <iframe src="https://player.xinpianchang.com/?aid=13584802&amp;mid=36Jm4aPDPrnwyjzB" allowfullscreen="" allow="fullscreen" frameborder="0" style="border: medium;"></iframe>
+                <iframe id="video-iframe" src="https://player.xinpianchang.com/?aid=13584802&amp;mid=36Jm4aPDPrnwyjzB" allowfullscreen="" allow="fullscreen" frameborder="0" style="border: medium;"></iframe>
             </div>
 
-            <!-- 任务内容区域 -->
-            <div class="task-content" id="task-content">
+            <!-- A课任务内容区域 -->
+            <div class="task-content" id="task-content-a">
                 <h2 class="task-title">注意力普查</h2>
                 
                 <div class="task-objective">
@@ -953,10 +964,69 @@
                 </div>
             </div>
 
+            <!-- B课任务内容区域 -->
+            <div class="task-content" id="task-content-b">
+                <h2 class="task-title">注意力主权开关练习</h2>
+                
+                <div class="task-objective">
+                    <div class="task-objective-title">目标</div>
+                    <div class="task-objective-desc">
+                        通过识别-暂停-觉察的步骤，安装注意力主权开关，重新掌控自己的注意力
+                    </div>
+                </div>
+                
+                <div class="task-steps">
+                    <div class="task-step">
+                        <div class="task-step-title">
+                            <span class="task-step-number">1</span>
+                            发现信号（识别）
+                        </div>
+                        <div class="task-step-content">
+                            <p>当你注意力被打断或分散（拿手机、杂念、外部干扰）</p>
+                            <p><strong>✅ 记录</strong>：占用来源（例如：手机 / 杂念 / 他人打断）</p>
+                        </div>
+                    </div>
+                    
+                    <div class="task-step">
+                        <div class="task-step-title">
+                            <span class="task-step-number">2</span>
+                            创造锚点（短暂停）
+                        </div>
+                        <div class="task-step-content">
+                            <p>停下动作 1–2秒，深呼吸或握拳作为心理锚点</p>
+                            <p><strong>✅ 记录感受</strong>：写一句当下的身体或心理状态（焦躁 / 想刷手机 / 分心等）</p>
+                        </div>
+                    </div>
+                    
+                    <div class="task-step">
+                        <div class="task-step-title">
+                            <span class="task-step-number">3</span>
+                            觉察（回到当下）
+                        </div>
+                        <div class="task-step-content">
+                            <p>问自己：</p>
+                            <p>“在做这个动作时，我想获得什么？我是不是在逃避一些东西？”</p>
+                            <p><strong>✅ 记录目标或意图</strong>：一句话写下，例如：“我想专注完成报告”，或“我只是想暂时放松”</p>
+                        </div>
+                    </div>
+                    
+                    <div class="task-step">
+                        <div class="task-step-title">
+                            <span class="task-step-number">4</span>
+                            小结
+                        </div>
+                        <div class="task-step-content">
+                            <p>总结今天最明显的占用来源与觉察，例如：</p>
+                            <p>“今天下午发现注意力被手机占用时，我意识到自己想逃避写邮件。”</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- 内容信息栏 -->
             <div class="content-info" id="video-info">
-                <h2 class="current-video-title">你的注意力，正在被谁“殖民”？</h2>
-                <p class="current-video-desc">
+                <h2 class="current-video-title" id="video-title">你的注意力，正在被谁“殖民”？</h2>
+                <p class="current-video-desc" id="video-desc">
                     在这个信息爆炸的时代，你的注意力正在被各种APP、社交媒体、广告和信息推送无情殖民。这节课程将帮助你诊断自己的注意力现状，看清注意力被消耗的底层机制，认识到注意力才是你最宝贵的资产，并学会安装第一个"注意力主权开关"，开始重新掌控自己的注意力。
                 </p>
             </div>
@@ -965,37 +1035,104 @@
 
     <script>
         // 获取DOM元素
-        const videoItem = document.getElementById('video-item');
-        const taskItem = document.getElementById('task-item');
+        const videoItemA = document.getElementById('video-item-a');
+        const videoItemB = document.getElementById('video-item-b');
+        const taskItemA = document.getElementById('task-item-a'); // A课任务
+        const taskItemB = document.getElementById('task-item-b'); // B课任务
         const videoContent = document.getElementById('video-content');
-        const taskContent = document.getElementById('task-content');
+        const taskContentA = document.getElementById('task-content-a'); // A课任务内容
+        const taskContentB = document.getElementById('task-content-b'); // B课任务内容
         const videoInfo = document.getElementById('video-info');
+        const videoIframe = document.getElementById('video-iframe');
+        const videoTitle = document.getElementById('video-title');
+        const videoDesc = document.getElementById('video-desc');
 
-        // 初始状态：显示视频，隐藏任务
+        // 存储课程视频信息
+        const courseVideos = {
+            a: {
+                src: "https://player.xinpianchang.com/?aid=13584802&amp;mid=36Jm4aPDPrnwyjzB",
+                title: "你的注意力，正在被谁“殖民”？",
+                desc: "在这个信息爆炸的时代，你的注意力正在被各种APP、社交媒体、广告和信息推送无情殖民。这节课程将帮助你诊断自己的注意力现状，看清注意力被消耗的底层机制，认识到注意力才是你最宝贵的资产，并学会安装第一个\"注意力主权开关\"，开始重新掌控自己的注意力。"
+            },
+            b: {
+                src: "https://player.xinpianchang.com/?aid=13585068&amp;mid=DGPB72KGW3vwdrm5",
+                title: "安装“注意力主权开关”的第一个动作",
+                desc: "这节实操课程将带你学习安装\"注意力主权开关\"的第一个具体动作，通过简单有效的方法，开始重新掌控自己的注意力，从被动的注意力被占用状态转变为主动掌控的状态。"
+            }
+        };
+
+        // 初始状态：显示A课视频，隐藏所有任务
         videoContent.style.display = 'flex';
-        taskContent.style.display = 'none';
+        taskContentA.style.display = 'none';
+        taskContentB.style.display = 'none';
 
-        // 点击A课显示视频
-        videoItem.addEventListener('click', function() {
+        // 点击A课显示A课视频
+        videoItemA.addEventListener('click', function() {
             // 切换激活状态
-            videoItem.classList.add('active');
-            taskItem.classList.remove('active');
+            videoItemA.classList.add('active');
+            videoItemB.classList.remove('active');
+            taskItemA.classList.remove('active');
+            taskItemB.classList.remove('active');
             
-            // 显示视频内容，隐藏任务内容
+            // 更新视频内容
+            videoIframe.src = courseVideos.a.src;
+            videoTitle.textContent = courseVideos.a.title;
+            videoDesc.textContent = courseVideos.a.desc;
+            
+            // 显示视频内容，隐藏所有任务内容
             videoContent.style.display = 'flex';
-            taskContent.style.display = 'none';
+            taskContentA.style.display = 'none';
+            taskContentB.style.display = 'none';
             videoInfo.style.display = 'block';
         });
 
-        // 点击任务按钮显示任务
-        taskItem.addEventListener('click', function() {
+        // 点击B课显示B课视频
+        videoItemB.addEventListener('click', function() {
             // 切换激活状态
-            taskItem.classList.add('active');
-            videoItem.classList.remove('active');
+            videoItemB.classList.add('active');
+            videoItemA.classList.remove('active');
+            taskItemA.classList.remove('active');
+            taskItemB.classList.remove('active');
             
-            // 显示任务内容，隐藏视频内容
+            // 更新视频内容
+            videoIframe.src = courseVideos.b.src;
+            videoTitle.textContent = courseVideos.b.title;
+            videoDesc.textContent = courseVideos.b.desc;
+            
+            // 显示视频内容，隐藏所有任务内容
+            videoContent.style.display = 'flex';
+            taskContentA.style.display = 'none';
+            taskContentB.style.display = 'none';
+            videoInfo.style.display = 'block';
+        });
+
+        // 点击A课任务按钮显示A课任务
+        taskItemA.addEventListener('click', function() {
+            // 切换激活状态
+            taskItemA.classList.add('active');
+            videoItemA.classList.remove('active');
+            videoItemB.classList.remove('active');
+            taskItemB.classList.remove('active');
+            
+            // 显示A课任务内容，隐藏其他内容
             videoContent.style.display = 'none';
-            taskContent.style.display = 'block';
+            taskContentA.style.display = 'block';
+            taskContentB.style.display = 'none';
+            videoInfo.style.display = 'none';
+        });
+
+        // 点击B课任务按钮显示B课任务
+        taskItemB.addEventListener('click', function() {
+            // 切换激活状态
+            taskItemA.classList.remove('active');
+            taskItemB.classList.add('active');
+            videoItemA.classList.remove('active');
+            videoItemB.classList.remove('active');
+            
+            // 显示B课任务内容，隐藏其他内容
+            videoContent.style.display = 'none';
+            taskContentA.style.display = 'none';
+            taskContentB.style.display = 'block';
             videoInfo.style.display = 'none';
         });
     </script>
