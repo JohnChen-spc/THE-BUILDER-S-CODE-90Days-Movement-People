@@ -599,6 +599,59 @@
             position: relative;
             z-index: 0;
         }
+        
+        /* 视频加载错误提示 */
+        .video-error {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            text-align: center;
+            padding: 20px;
+            z-index: 2;
+            display: none;
+        }
+        
+        .video-error-icon {
+            font-size: 48px;
+            color: var(--blue-metal);
+            margin-bottom: 20px;
+        }
+        
+        .video-error-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .video-error-desc {
+            font-size: 16px;
+            color: var(--text-sub);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        
+        .video-error-link {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: var(--blue-metal);
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .video-error-link:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
 
         /* 任务内容区域 */
         .task-content {
@@ -900,7 +953,17 @@
         <main class="content-area">
             <!-- 视频播放器 - 嵌入实际视频iframe -->
             <div class="video-player" id="video-content">
-                <iframe id="video-iframe" src="https://player.xinpianchang.com/?aid=13584802&amp;mid=36Jm4aPDPrnwyjzB" allowfullscreen="" allow="fullscreen" frameborder="0" style="border: medium;"></iframe>
+                <iframe id="video-iframe" src="https://player.xinpianchang.com/?aid=13584802&mid=36Jm4aPDPrnwyjzB" allowfullscreen="" allow="fullscreen" frameborder="0" style="border: medium;"></iframe>
+                <!-- 视频加载错误提示 -->
+                <div class="video-error" id="video-error">
+                    <i class="fas fa-exclamation-triangle video-error-icon"></i>
+                    <h3 class="video-error-title">视频加载失败</h3>
+                    <p class="video-error-desc">
+                        抱歉，当前视频无法正常加载。这可能是因为视频链接失效、权限限制或网络问题。
+                        请检查视频链接是否有效，或稍后再试。
+                    </p>
+                    <a href="#" class="video-error-link" id="reload-video">重新加载视频</a>
+                </div>
             </div>
 
             <!-- A课任务内容区域 -->
@@ -1046,25 +1109,55 @@
         const videoIframe = document.getElementById('video-iframe');
         const videoTitle = document.getElementById('video-title');
         const videoDesc = document.getElementById('video-desc');
+        const videoError = document.getElementById('video-error');
+        const reloadVideoBtn = document.getElementById('reload-video');
 
-        // 存储课程视频信息
+        // 存储课程视频信息（修正链接格式，使用&而非&amp;）
         const courseVideos = {
             a: {
-                src: "https://player.xinpianchang.com/?aid=13584802&amp;mid=36Jm4aPDPrnwyjzB",
+                src: "https://player.xinpianchang.com/?aid=13584802&mid=36Jm4aPDPrnwyjzB",
                 title: "你的注意力，正在被谁“殖民”？",
                 desc: "在这个信息爆炸的时代，你的注意力正在被各种APP、社交媒体、广告和信息推送无情殖民。这节课程将帮助你诊断自己的注意力现状，看清注意力被消耗的底层机制，认识到注意力才是你最宝贵的资产，并学会安装第一个\"注意力主权开关\"，开始重新掌控自己的注意力。"
             },
             b: {
-                src: "https://player.xinpianchang.com/?aid=13585068&amp;mid=DGPB72KGW3vwdrm5",
+                src: "https://player.xinpianchang.com/?aid=13585068&mid=DGPB72KGW3vwdrm5",
                 title: "安装“注意力主权开关”的第一个动作",
                 desc: "这节实操课程将带你学习安装\"注意力主权开关\"的第一个具体动作，通过简单有效的方法，开始重新掌控自己的注意力，从被动的注意力被占用状态转变为主动掌控的状态。"
             }
         };
 
+        // 监听iframe加载错误
+        videoIframe.addEventListener('error', function() {
+            videoError.style.display = 'flex';
+        });
+        
+        // 监听iframe加载完成
+        videoIframe.addEventListener('load', function() {
+            // 检查iframe内容是否有效（简单判断）
+            setTimeout(() => {
+                try {
+                    // 如果跨域，这里会报错，说明视频可能加载失败
+                    if (videoIframe.contentDocument.body.innerHTML.trim() === '') {
+                        videoError.style.display = 'flex';
+                    }
+                } catch (e) {
+                    // 跨域正常，不处理
+                }
+            }, 3000);
+        });
+        
+        // 重新加载视频按钮
+        reloadVideoBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            videoError.style.display = 'none';
+            videoIframe.src = videoIframe.src; // 重新加载当前视频
+        });
+
         // 初始状态：显示A课视频，隐藏所有任务
         videoContent.style.display = 'flex';
         taskContentA.style.display = 'none';
         taskContentB.style.display = 'none';
+        videoError.style.display = 'none';
 
         // 点击A课显示A课视频
         videoItemA.addEventListener('click', function() {
@@ -1075,6 +1168,7 @@
             taskItemB.classList.remove('active');
             
             // 更新视频内容
+            videoError.style.display = 'none';
             videoIframe.src = courseVideos.a.src;
             videoTitle.textContent = courseVideos.a.title;
             videoDesc.textContent = courseVideos.a.desc;
@@ -1095,6 +1189,7 @@
             taskItemB.classList.remove('active');
             
             // 更新视频内容
+            videoError.style.display = 'none';
             videoIframe.src = courseVideos.b.src;
             videoTitle.textContent = courseVideos.b.title;
             videoDesc.textContent = courseVideos.b.desc;
